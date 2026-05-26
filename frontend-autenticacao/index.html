@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinica Odontologica | Login</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="brand-panel" aria-label="Clinica Odontologica">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+        </div>
+        <div>
+          <p class="eyebrow">Clinica Odontologica</p>
+          <h1>Acesso ao sistema</h1>
+          <p class="support-text">Entre com um usuario cadastrado para acessar os servicos da clinica.</p>
+        </div>
+      </section>
+
+      <section class="login-panel" aria-label="Formulario de login">
+        <form id="loginForm" class="login-form">
+          <div class="form-header">
+            <h2>Login</h2>
+            <span id="apiStatus" class="status-pill">verificando</span>
+          </div>
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" value="gerente@clinica.com" required />
+
+          <label for="senha">Senha</label>
+          <input id="senha" name="senha" type="password" autocomplete="current-password" value="123456" required />
+
+          <button id="submitButton" type="submit">Entrar</button>
+          <p id="message" class="message" role="status"></p>
+        </form>
+
+        <div id="sessionBox" class="session-box" hidden>
+          <div>
+            <span class="session-label">Token JWT</span>
+            <p id="tokenPreview"></p>
+          </div>
+          <button id="logoutButton" type="button" class="secondary-button">Sair</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
