@@ -85,7 +85,7 @@ jobs:
           SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/clinica_auth
           SPRING_DATASOURCE_USERNAME: root
           SPRING_DATASOURCE_PASSWORD: root
-        run: mvn -B verify jacoco:report
+        run: mvn -B verify
 
       - name: Upload relatório JaCoCo
         uses: actions/upload-artifact@v4
