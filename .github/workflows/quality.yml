@@ -117,6 +117,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          
       - name: Gitleaks - verificar secrets expostos
         uses: gitleaks/gitleaks-action@v2
         env:
