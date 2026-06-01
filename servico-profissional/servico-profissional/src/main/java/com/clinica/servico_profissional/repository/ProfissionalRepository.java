@@ -1,6 +1,6 @@
 package com.clinica.servico_profissional.repository;
 
-import com.clinica.servico_profissional.model.Profissional;
+import com.clinica.servico.profissional.model.Profissional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
