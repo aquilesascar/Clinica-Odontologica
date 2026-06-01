@@ -1,39 +1,61 @@
-# Clinica Docker
+# Clinica Odontologica
 
-Repositorio preparado apenas com a configuracao de ambiente da sprint.
-
-## Escopo Atual
-
-- Banco MySQL em Docker Compose
-- Documentacao da sprint em `docs/sprint 0`
-- Sem implementacao de microservicos neste repositorio
-
-## Aderencia ao Documento
-
-O documento descreve uma arquitetura orientada a microsservicos para a clinica odontologica. Neste estado do projeto foi mantida somente a base de ambiente, sem codigo de servicos, para evitar implementacoes parciais fora do escopo desejado.
-
-## Tecnologias Mantidas
+Projeto com ambiente Docker para subir a aplicacao de autenticacao completa:
 
 - MySQL 8
+- Servico de autenticacao em Spring Boot
+- Frontend estatico servido por Nginx
+
+## Requisitos
+
 - Docker
 - Docker Compose
 
-## Ambiente
+Nao e necessario instalar Java, Maven, MySQL ou Nginx na maquina. O build do backend baixa as dependencias Maven dentro do container.
 
-O arquivo `docker-compose.yml` sobe apenas a infraestrutura de banco de dados:
+## Como Rodar
 
-1. `mysql`
-   - Banco relacional da aplicacao
-   - Porta externa `3306`
-   - Volume persistente `mysql_data`
-   - Rede `clinica-net`
+Na raiz do projeto, execute:
+
+```bash
+docker compose up --build
+```
+
+Apos os containers subirem:
+
+- Frontend: http://localhost:3000
+- API de autenticacao: http://localhost:8081
+- MySQL local: `localhost:3307`
+
+Para parar:
+
+```bash
+docker compose down
+```
+
+Para apagar tambem os dados persistidos do MySQL:
+
+```bash
+docker compose down -v
+```
 
 ## Estrutura
 
 ```text
 Clinica-Odontologica/
 |-- docker-compose.yml
-|-- README.md
+|-- frontend-autenticacao/
+|   |-- Dockerfile
+|   |-- nginx.conf
+|   `-- app.js
+|-- servico-autenticacao/
+|   |-- Dockerfile
+|   `-- servico-autenticacao/
+|       |-- pom.xml
+|       `-- src/
 `-- docs/
-    `-- sprint 0/
 ```
+
+## Observacoes
+
+O `docker-compose.yml` usa healthcheck no MySQL antes de iniciar o backend. Isso evita falhas comuns em maquinas novas, quando o Spring tenta conectar no banco antes dele estar pronto.

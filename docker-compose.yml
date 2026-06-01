@@ -9,8 +9,15 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     networks:
       - clinica-net
+    restart: unless-stopped
 
   servico-autenticacao:
     build: ./servico-autenticacao
@@ -22,9 +29,11 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - clinica-net
+    restart: unless-stopped
 
   frontend-autenticacao:
     build: ./frontend-autenticacao
@@ -35,6 +44,7 @@ services:
       - servico-autenticacao
     networks:
       - clinica-net
+    restart: unless-stopped
 
 volumes:
   mysql_data:
